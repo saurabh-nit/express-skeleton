@@ -5,8 +5,8 @@
     <title><%= title %></title>
     <%- include('./common/stylesheets') %>
   </head>
-  <body style="background-color:#c7eac7">
-  <div class="container">
+  <body style="background-color: #26332d">
+  <div class="container" style="color:white">
 
       <div class="row col-lg-6 col-lg-offset-3 ">
         <h2><%= title %></h2><br>
@@ -30,7 +30,10 @@
                 <label for="dob">Password :</label>
                 <input type="password" class="form-control" id="pwd" placeholder="Password">
               </div>
-              <button type="button" id="btn" class="btn btn-success col-md-offset-5 "><b>Submit</b></button>
+            <div >
+              <br><button type="button" id="btn" class="btn btn-primary col-md-offset-4"><b>Register Yourself</b></button><br>
+              <hr><button type="button" id="login" class="btn btn-success col-md-offset-5"><b>Login</b></button>
+            </div>
        </form>
      </div>     <!-- Second Cloumn-->
  </div>          <!--   Container Class -->
@@ -39,151 +42,136 @@
 
  <script>
     $(document).ready(function() {
-         $('#btn').click(function (evt) {
-           evt.preventDefault();
-        var x = 0;
-          if(validate()){
-              //return true;
-           alert('In Validation')
-          }
-          else{
-            alert('After Validation');
-          }
-
-      //      var user = {
-      //
-      //            name :  {
-      //                      first : $('#fname').val(),
-      //                       last : $('#lname').val(),
-      //                    },
-      //
-      //            email : $('#mail').val(),
-      //         password : $('#pwd').val()
-      //     }
-      //
-      // $.ajax({
-      //          type :"POST",
-      //         cache :false,
-      //           url :'/',
-      //          data : user ,    // multiple data sent using ajax
-      //       success : function(result){
-      //                    //alert(abc.name.first);
-      //                    alert('User registration is successful.');
-      //                    //clearform();
-      //                    window.location.href='/';
-      //                   }
-      //        });
-         //window.location.href='/';
-          // }
-         return false;
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function clearform(){
-      $('#fname').val(null)
-      $('#lname').val(null)
-      $('#mail').val(null)
-      $('#pwd').val(null)
-
-  }
-
-function validate(){
+         $('#login').click(function(){
+           window.location.href = '/login';
+         });
+         $('#btn').click(function () {
 
              first = $('#fname').val();
               last = $('#lname').val();
          mailinput = $('#mail').val();
           pwdinput = $('#pwd').val();
 
+      //alert('ok');
 
-   if(user(first,last))
+ if(user(first,last))
+  {
+     if(ValidateEmail(mailinput))
+       {
+         if(password(pwdinput))
+           {
+                var user = {
 
+                   name :  {
+                             first : $('#fname').val(),
+                              last : $('#lname').val(),
+                           },
 
-       if(ValidateEmail(mailinput))
-         {
-           if(password(pwdinput))
-             {
+                   email : $('#mail').val(),
+                password : $('#pwd').val()
+               }
 
-             }
-         }
-    }
+               $.ajax({
+                        type :"POST",
+                       cache :false,
+                         url :'/',
+                        data : user ,    // multiple data sent using ajax
+                     success : function(result){
+                                  //alert(abc.name.first);
+                                  //alert('User registration is successful.');
+                                  clearform();
+                                  new PNotify({
+                                        title: 'Thank You',
+                                         text: 'You are now registered.',
+                                         type: 'success',
+                                         icon: 'fa fa-user-circle'
+                                  });
+                              }
+                      });
+           }
+       }
+  }
   return false;
-}
 
-    // USER NAME VALIDATION --
+// USER NAME VALIDATION --
    function user(f,l){
+
        if (f==''){
-           alert('Please fill first name');
+           //alert('Please fill first name');
+           new PNotify({
+                 title: 'Alert',
+                  text: 'Please Fill First Name.',
+                  type: 'error',
+                  icon: 'fa fa-user-circle'
+           });
             $('#fname').focus();
            return false;
        }
        else if(l==''){
-         alert('Please fill last name');
+         //alert('Please fill last name');
+         new PNotify({
+               title: 'Alert',
+                text: 'Please Fill Larst Name.',
+                type: 'error',
+                icon: 'fa fa-user-circle'
+         });
          $('#lname').focus();
          return false;
        }
-       else{
-        return true;
-      }
-    //  return 1;
+     return true;
    }
 
+//EMAIL VALIDATION --
    function ValidateEmail(mailinput){
-      //alert(mailinput);
-     //if(mail=='')
+
       var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if(mailinput.match(mailformat)){
          return true;
       }
       else{
-        alert("You have entered an invalid email address!");
+         //alert("You have entered an invalid email address!");
+        new PNotify({
+              title: 'Alert',
+               text: 'Invalid E-mail Address.',
+               type: 'error',
+               icon: 'fa fa-user-circle'
+        });
         $('#mail').focus();
         return false;
      }
    }
-
+//PASSWORD VALIDATION --
    function password(b)
    {
      if(b==''){
-       alert("Please provide password");
+      // alert("Please provide password");
+       new PNotify({
+             title: 'Alert',
+              text: 'Please Fill Password',
+              type: 'error',
+              icon: 'fa fa-user-circle'
+       });
        $('#pwd').focus();
        return false;
       }
      else {
-        return 1;
+        return true;
      }
-     return 1;
+    return false;
    }
 
+  //CLEAR FORM FIELDS
+
+  function clearform(){
+      $('#fname').val(null);
+      $('#lname').val(null);
+      $('#mail').val(null);
+      $('#pwd').val(null);
+  }
 
 
+   });
+});
 </script>
 </body>
 </html>

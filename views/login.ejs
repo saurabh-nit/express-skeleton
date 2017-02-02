@@ -74,18 +74,18 @@
                   data : logindata ,    // multiple data sent using ajax
                success : function(result){
                          //console.log(result);
-                         if(result.error){
+                         if(result.data){
                             new PNotify({
                                   title: 'Login Alert',
-                                  text : 'E-mail not found.',
-                                  type : 'warning',
+                                  text : result.data,
+                                  type : 'error',
                                   icon : 'fa fa-envelope-o'
                                  });
                                  $('#mail').val(null)
                                  $('#pwd').val(null)
                             }
                           else{
-                            alert("Login Successful");
+                          //  alert("Login Successful");
                             window.location.href = '/afterlogin';
                             new PNotify({
                                   title: 'Congratulations',

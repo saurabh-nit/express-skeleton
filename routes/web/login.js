@@ -22,7 +22,7 @@ module.exports = {
             console.log(data);
             if(data == null || data=="") {
                 console.log('E-mail not found');
-                return res.json({error: true});
+                return res.json({error: true, data:'E-mail not found.'});
              }
 
 
@@ -49,6 +49,9 @@ module.exports = {
                      });
 
                   }
+                 else{
+                   return res.json({error:true, data:'Incorrect Password.'});
+                 }
 
              });
 

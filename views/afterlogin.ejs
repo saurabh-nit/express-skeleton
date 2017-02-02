@@ -5,11 +5,15 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <%- include('./common/stylesheets') %>
   </head>
-  <body>
+  <body id="b">
+    <div id="j" class="jumbotron text-center">
     <h2>Your Name is : <%= data.n %></h2><br>
     <h3>Your Email is : <%= data.e %></h3><br>
     <h4>Your Login Time is : <%= data.t %><h4><br>
     <button class="btn btn-success" id="out">LOG OUT</button>
+    <div>
+
+
 
     <%- include('./common/javascripts') %>
     <script>
@@ -31,6 +35,12 @@
                  success : function(result){
                              alert('Logged Out successfully');
                              window.location.href='/login';
+                             new PNotify({
+                                   title: 'See you soon..',
+                                    text: 'Logged out',
+                                    type: 'info',
+                                    icon: 'fa fa-user-circle'
+                             });
                            }
              });
         return false;

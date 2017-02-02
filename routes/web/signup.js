@@ -6,7 +6,7 @@ var User = require('../../models/user');
 module.exports = {
   get : function (req, res) {
 
-    res.render('signup', { title: 'Welcome to Logic Square Technologies'});
+    res.render('signup', { title: 'Welcome to Registration Page'});
   },
 
  post : function(req, res){

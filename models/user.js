@@ -4,8 +4,18 @@ var bcrypt = require('bcrypt-nodejs');
 // var config = require('../config')[process.env.NODE_ENV || 'development'];
 
 var UserSchema = new mongoose.Schema({
-    
-    
+
+
+  name : {
+   first: {
+     type: String,
+   },
+
+   last : {
+      type: String
+    },
+   },
+
   email: {
       type: String,
       lowercase: true,
@@ -23,19 +33,14 @@ var UserSchema = new mongoose.Schema({
     default: true
   },
 
-  name: {
-   first: {
-     type: String,
-   },
-   last: {
-     type: String
-   },
-  },
-  
+
+
+
+
 
 });
 
-// Save user's hashed password
+// Save user's hashed password                // This thing is called hook
 UserSchema.pre('save', function (next) {
     var user = this;
     if (this.isModified('password') || this.isNew) {

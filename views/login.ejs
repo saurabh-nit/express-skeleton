@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+     <%- include('./common/stylesheets') %>
+  </head>
+  <body style="background-color:#2f4972">
+  <div class="container" style="color : white">
+
+      <div class="row col-lg-6 col-lg-offset-3 ">
+        <div>
+        <h1>   <%= title %>  </h1>
+
+        <form name="pet">
+
+              <div class="form-group">
+                <label for="age">E-mail :</label>
+                <input type="text" class="form-control" id="mail" placeholder="Enter E-mail">
+              </div>
+
+              <div class="form-group">
+                <label for="dob">Password :</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Password">
+              </div>
+              <button type="button" id="login" class="btn btn-success col-md-offset-5 "><b>Submit</b></button>
+          </div>
+       </form>
+
+     </div>     <!-- Second Cloumn-->
+ </div>          <!--   Container Class -->
+
+<%- include('./common/javascripts') %>
+<script>
+  $(document).ready(function() {
+         $('#login').click(function (evt) {
+           evt.preventDefault();
+           mailinput = $('#mail').val();
+            pwdinput = $('#pwd').val();
+
+    function validate(mailinput,pwdinput){
+           var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+           if(mailinput.match(mailformat)){
+            //  console.log('email matched');
+              if(pwdinput==''){
+                alert('Please fill password.');
+                $('#pwd').focus();
+                return false;
+              }
+           }
+           else{
+             alert('Invalid E-mail.');
+             $('#mail').focus();
+             return false;
+           }
+     return 1;
+    }
+
+
+    if(validate(mailinput,pwdinput)){
+      //alert('hii');
+
+      var logindata = {
+
+                  email : $('#mail').val(),
+               password : $('#pwd').val()
+         }
+    // console.log(logindata);
+
+
+             $.ajax({
+                  type :"POST",
+                 cache :false,
+                   url :'/check',
+                  data : logindata ,    // multiple data sent using ajax
+               success : function(result){
+                         //console.log(result);
+                         if(result.error){
+                            new PNotify({
+                                  title: 'Login Alert',
+                                  text : 'E-mail not found.',
+                                  type : 'warning',
+                                  icon : 'fa fa-envelope-o'
+                                 });
+                                 $('#mail').val(null)
+                                 $('#pwd').val(null)
+                            }
+                          else{
+                            alert("Login Successful");
+                            window.location.href = '/afterlogin';
+                            new PNotify({
+                                  title: 'Congratulations',
+                                   text: 'You are logged in',
+                                   type: 'success',
+                                   icon: 'fa fa-user-circle'
+                            });
+                          }
+                        }
+             });
+
+
+
+        }
+      return false;
+    });
+});
+</script>
+</body>
+</html>

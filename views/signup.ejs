@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title><%= title %></title>
+    <%- include('./common/stylesheets') %>
+  </head>
+  <body style="background-color:#c7eac7">
+  <div class="container">
+
+      <div class="row col-lg-6 col-lg-offset-3 ">
+        <h2><%= title %></h2><br>
+        <form name="pet">
+              <div class="form-group">
+                <label for="fname">First Name :</label>
+                <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter First Name">
+              </div>
+
+              <div class="form-group">
+                <label for="lname">Last Name :</label>
+                <input type="text" class="form-control" id="lname" placeholder="Enter Last Name">
+              </div>
+
+              <div class="form-group">
+                <label for="age">E-mail :</label>
+                <input type="text" class="form-control" id="mail" placeholder="Enter E-mail">
+              </div>
+
+              <div class="form-group">
+                <label for="dob">Password :</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Password">
+              </div>
+              <button type="button" id="btn" class="btn btn-success col-md-offset-5 "><b>Submit</b></button>
+       </form>
+     </div>     <!-- Second Cloumn-->
+ </div>          <!--   Container Class -->
+
+<%- include('./common/javascripts') %>
+
+ <script>
+    $(document).ready(function() {
+         $('#btn').click(function (evt) {
+           evt.preventDefault();
+        var x = 0;
+          if(validate()){
+              //return true;
+           alert('In Validation')
+          }
+          else{
+            alert('After Validation');
+          }
+
+      //      var user = {
+      //
+      //            name :  {
+      //                      first : $('#fname').val(),
+      //                       last : $('#lname').val(),
+      //                    },
+      //
+      //            email : $('#mail').val(),
+      //         password : $('#pwd').val()
+      //     }
+      //
+      // $.ajax({
+      //          type :"POST",
+      //         cache :false,
+      //           url :'/',
+      //          data : user ,    // multiple data sent using ajax
+      //       success : function(result){
+      //                    //alert(abc.name.first);
+      //                    alert('User registration is successful.');
+      //                    //clearform();
+      //                    window.location.href='/';
+      //                   }
+      //        });
+         //window.location.href='/';
+          // }
+         return false;
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function clearform(){
+      $('#fname').val(null)
+      $('#lname').val(null)
+      $('#mail').val(null)
+      $('#pwd').val(null)
+
+  }
+
+function validate(){
+
+             first = $('#fname').val();
+              last = $('#lname').val();
+         mailinput = $('#mail').val();
+          pwdinput = $('#pwd').val();
+
+
+   if(user(first,last))
+
+
+       if(ValidateEmail(mailinput))
+         {
+           if(password(pwdinput))
+             {
+
+             }
+         }
+    }
+  return false;
+}
+
+    // USER NAME VALIDATION --
+   function user(f,l){
+       if (f==''){
+           alert('Please fill first name');
+            $('#fname').focus();
+           return false;
+       }
+       else if(l==''){
+         alert('Please fill last name');
+         $('#lname').focus();
+         return false;
+       }
+       else{
+        return true;
+      }
+    //  return 1;
+   }
+
+   function ValidateEmail(mailinput){
+      //alert(mailinput);
+     //if(mail=='')
+      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if(mailinput.match(mailformat)){
+         return true;
+      }
+      else{
+        alert("You have entered an invalid email address!");
+        $('#mail').focus();
+        return false;
+     }
+   }
+
+   function password(b)
+   {
+     if(b==''){
+       alert("Please provide password");
+       $('#pwd').focus();
+       return false;
+      }
+     else {
+        return 1;
+     }
+     return 1;
+   }
+
+
+
+</script>
+</body>
+</html>

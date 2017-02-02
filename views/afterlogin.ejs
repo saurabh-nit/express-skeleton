@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include('./common/stylesheets') %>
+  </head>
+  <body>
+    <h2>Your Name is : <%= data.n %></h2><br>
+    <h3>Your Email is : <%= data.e %></h3><br>
+    <h4>Your Login Time is : <%= data.t %><h4><br>
+    <button class="btn btn-success" id="out">LOG OUT</button>
+
+    <%- include('./common/javascripts') %>
+    <script>
+    new PNotify({
+          title: 'Congratulations',
+           text: 'You are logged in',
+           type: 'success'
+    });
+
+    </script>
+ <script>
+   $(document).ready(function() {
+        $('#out').click(function (evt) {
+          evt.preventDefault();
+
+             $.ajax({
+                    type :"POST",
+                     url :'/logout',
+                 success : function(result){
+                             alert('Logged Out successfully');
+                             window.location.href='/login';
+                           }
+             });
+        return false;
+      });
+   });
+</script>
+</body>
+</html>

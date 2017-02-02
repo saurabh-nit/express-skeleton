@@ -9,8 +9,9 @@ var session = require('express-session');
 var mailer = require('express-mailer');
 // var helmet = require('helmet');
 
-var config = require('./config')[process.env.NODE_ENV || 'development'];
+// mongoose.connect("mongodb://localhost/logindb");
 
+var config = require('./config')[process.env.NODE_ENV || 'development'];
 var routes = require('./routes/web/index');
 // var users = require('./routes/users');
 

@@ -5,7 +5,7 @@ module.exports = {
     // "database": "mongodb://localhost:27017/mylogindb",
 
     //"siteUrl": "http://localhost:3000",
-    "siteUrl": "host=myappmcq.herokuapp.com",
+    "siteUrl": "https://myappmcq.herokuapp.com",
     "email": {
       "from": "s26c.sayan@gmail.com",
       "host": "smtp-pulse.com",

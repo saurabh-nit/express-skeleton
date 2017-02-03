@@ -3,16 +3,7 @@ var router = express.Router();
 //var User = require('../../models/user');
 var moment = require('moment');
 
-// var checkNaN = function(req,res,next){
-//                     // if(chk==null){
-//                     //   next();
-//                     // }
-//                     // else{
-//                     //   return res.render('login');
-//                     }
-//                     console.log("IN MIDDLEWARE");
-// }
-  //router.all("*",checkNaN);
+
 
 module.exports = {
 

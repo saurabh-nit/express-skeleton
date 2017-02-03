@@ -16,6 +16,8 @@ a {
 
 #b{
       background-color:#2f4972;
+ }
 
-
+#out{
+      opacity: 2;
 }

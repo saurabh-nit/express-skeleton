@@ -1,7 +1,9 @@
 module.exports = {
   'development': {
     "secret": "bd17ddffc6694d25834a99ac2708a498",
-    "database": "mongodb://localhost:27017/logindb",
+    "database": "mongodb://saurabh:12345@ds139969.mlab.com:39969/mylogindb",
+    // "database": "mongodb://localhost:27017/mylogindb",
+
     "siteUrl": "http://localhost:3000",
     "email": {
       "from": "s26c.sayan@gmail.com",

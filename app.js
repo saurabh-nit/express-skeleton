@@ -11,7 +11,7 @@ var mailer = require('express-mailer');
 
 // mongoose.connect("mongodb://localhost/logindb");
 
-var config = require('./config')[process.env.NPM_CONFIG_PRODUCTION || 'development'];
+var config = require('./config')[process.env.NODE_ENV || 'development'];
 var routes = require('./routes/web/index');
 // var users = require('./routes/users');
 
